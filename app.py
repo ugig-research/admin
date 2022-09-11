@@ -12,10 +12,23 @@ fetch_collections_body = {
   "operation": "FetchCollections",
   "payload": {}
 }
-response = call_ugig_api(json.dumps(fetch_collections_body))
-collections_df = pd.DataFrame(response['collections'])
+fetch_collections_response = call_ugig_api(json.dumps(fetch_collections_body))
+collections_df = pd.DataFrame(fetch_collections_response['collections'])
 
 
 st.subheader('Collections')
-st.write(f"Total Collections:  {response['count']}")
+st.write(f"Total Collections:  {fetch_collections_response['count']}")
 st.dataframe(collections_df)
+
+
+fetch_profile_packs_body = {
+  "operation": "FetchProfilePacks",
+  "payload": {}
+}
+fetch_profile_packs_response = call_ugig_api(json.dumps(fetch_profile_packs_body))
+profile_packs_df = pd.DataFrame(fetch_profile_packs_response['profile_packs'])
+
+
+st.subheader('Profile Packs')
+st.write(f"Total Profile Packs:  {fetch_profile_packs_response['count']}")
+st.dataframe(profile_packs_df)
