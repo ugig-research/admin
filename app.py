@@ -7,28 +7,13 @@ from api_lib import call_ugig_api
 
 st.title('UGIG Admin')
 
-
-fetch_collections_body = {
-  "operation": "FetchCollections",
+fetch_users_body = {
+  "operation": "FetchUsers",
   "payload": {}
 }
-fetch_collections_response = call_ugig_api(json.dumps(fetch_collections_body))
-collections_df = pd.DataFrame(fetch_collections_response['collections'])
+fetch_user_response = call_ugig_api(json.dumps(fetch_users_body))
+users_df = pd.DataFrame(fetch_user_response['users'])
 
-
-st.subheader('Collections')
-st.write(f"Total Collections:  {fetch_collections_response['count']}")
-st.dataframe(collections_df)
-
-
-fetch_profile_packs_body = {
-  "operation": "FetchProfilePacks",
-  "payload": {}
-}
-fetch_profile_packs_response = call_ugig_api(json.dumps(fetch_profile_packs_body))
-profile_packs_df = pd.DataFrame(fetch_profile_packs_response['profile_packs'])
-
-
-st.subheader('Profile Packs')
-st.write(f"Total Profile Packs:  {fetch_profile_packs_response['count']}")
-st.dataframe(profile_packs_df)
+st.subheader('Users')
+st.write(f"Total Users:  {fetch_user_response['count']}")
+st.dataframe(users_df)
